@@ -5,7 +5,7 @@ Team members
     Dotty Horsman
     Jiahao Fu
     Brayden Gates
-    Michael Jackson
+    Michael Jackson 
     Cole Newkerk
     
 User stories
