@@ -32,14 +32,15 @@ User stories
 
 Iteration plans
     1st Iteration: the Basic Offline Requirements 
+        Get todo list from cloud
+        parse cloud info
         Creating a Todo list
         Creating todo item
         Adding items to the list
         Adding reminders (date and time) to the Todo list
     2nd Iteration: Cloud Stuff
-        Upload todo list to cloud
-        Get todo list from cloud
         Create UI 
+        Upload todo list to cloud
     3rd Iteration: Dashboard
         Get the latest to-do list from the cloud
         Add UI
