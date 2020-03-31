@@ -1,4 +1,4 @@
-package CloudUtils;
+package cloudGetterTest;
 
 public class CloudParser {
 }
