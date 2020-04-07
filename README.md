@@ -31,21 +31,22 @@ User stories
         The app will have a statistics dashboard that shows the following statistics in one single piechart: number of all todo items, number of completed todo items, number of overdue todo items and number of pending todo items.
 
 Iteration plans
-    1st Iteration: the Basic Offline Requirements 
-        Get todo list from cloud
+    1st Iteration: 
+        Get todo list from cloud: DONE
+        Creating a Todo list: DONE
+        Creating todo item: DONE
         parse cloud info
-        Creating a Todo list
-        Creating todo item
         Adding items to the list
-        Adding reminders (date and time) to the Todo list
-    2nd Iteration: Cloud Stuff
+    2nd Iteration: 
         Create UI 
-        Upload todo list to cloud
-    3rd Iteration: Dashboard
-        Get the latest to-do list from the cloud
-        Add UI
+            Sync button
+            Add button
+            Delete button
+            Revise button
+        Upload todo list / items to cloud
+    3rd Iteration: 
         Pie Chart
-        Sync button
-        Add button
-        Delete button
-        Revise button
+        Adding reminders (date and time) to the Todo list
+        
+        
+        Database later

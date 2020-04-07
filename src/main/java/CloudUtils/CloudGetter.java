@@ -8,7 +8,7 @@ import java.io.IOException;
 public class CloudGetter
 {
     private HttpRequestFactory requestFactory;
-    private String baseURL = "https://todoserver222.herokuapp.com/";
+    private String baseURL = "https://todoserver222.herokuapp.com";
     private String todosURL = baseURL + "todos/";
 
     public CloudGetter()
