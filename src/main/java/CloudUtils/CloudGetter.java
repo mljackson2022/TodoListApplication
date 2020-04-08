@@ -9,7 +9,7 @@ public class CloudGetter
 {
     private HttpRequestFactory requestFactory;
     private String baseURL = "https://todoserver222.herokuapp.com";
-    private String todosURL = baseURL + "todos/";
+    private String todosURL = baseURL + "team4/todos";
 
     public CloudGetter()
     {
