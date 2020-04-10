@@ -32,21 +32,20 @@ User stories
 
 Iteration plans
     1st Iteration: 
-        Get todo list from cloud: DONE
-        Creating a Todo list: DONE
-        Creating todo item: DONE
-        parse cloud info
-        Adding items to the list
+        CloudGetter - Get todo list from cloud 
+        CloudParser - parse cloud info
+        CloudEditor - add and delete todo items in the cloud
+        TodoList
+        TodoItem
+     
     2nd Iteration: 
         Create UI 
             Sync button
             Add button
             Delete button
             Revise button
-        Upload todo list / items to cloud
+        Add Database functionality
+        
     3rd Iteration: 
         Pie Chart
         Adding reminders (date and time) to the Todo list
-        
-        
-        Database later
