@@ -25,9 +25,9 @@ public class TodoItem {
           Date date1 = new Date();
           this.creationTime = date1.getTime();
 
-          Calendar InitiaTime = Calendar.getInstance();
-          InitiaTime.set(0,0,0,0,0);
-          this.completionTime=InitiaTime;
+          Calendar InitialTime = Calendar.getInstance();
+          InitialTime.set(0,0,0,0,0);
+          this.completionTime=InitialTime;
 
           Calendar deadlineTime = Calendar.getInstance();
           deadlineTime.set(year, month-1, date, hour, minute);

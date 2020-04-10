@@ -25,21 +25,16 @@ public class CloudEditor
     {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("title", title);
-        data.put("owner", this.owner);
+        data.put("owner", owner);
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest postRequest = requestFactory.buildPostRequest(
-                new GenericUrl(todosURL), content);
+                new GenericUrl("https://todoserver222.herokuapp.com/todos"),content);
         String rawResponse = postRequest.execute().parseAsString();
 
-        var resultID = "";
-        for (var ch : rawResponse.toCharArray())
-        {
-            if (Character.isDigit(ch))
-            {
-                resultID += ch;
-            }
-        }
-        return Integer.parseInt(resultID);
+        int indexOfID = rawResponse.indexOf("id");
+        String IDWithEnding = rawResponse.substring(indexOfID + 5);
+        String IDWithoutEnding = IDWithEnding.substring(0, IDWithEnding.length() - 2);
+        return(Integer.valueOf(IDWithoutEnding));
     }
 
 
