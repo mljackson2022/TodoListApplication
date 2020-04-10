@@ -7,17 +7,19 @@ public class TodoItem {
      private String title;
      private String owner;
      private String content;
-     private static int id = 0;
+     private final int id;
+     private static int nextID=1;
      private boolean status;
      private long creationTime;
      private Calendar completionTime;
      private Calendar deadlineTime;
 
+
      public TodoItem(String title, String owner, String content, int year, int month, int date, int hour, int minute){
           this.title = title;
           this.owner = owner;
           this.content = content;
-          this.id = id++;
+          this.id = getNextID();
           this.status = false;
 
           Date date1 = new Date();
@@ -56,7 +58,13 @@ public class TodoItem {
           this.content = content;
      }
 
-     public static int getId() {
+     public int getId() {
+          return id;
+     }
+
+     public static int getNextID(){
+          int id=nextID;
+          nextID++;
           return id;
      }
 
