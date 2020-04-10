@@ -6,6 +6,7 @@ import todo.TodoItem;
 import todo.TodoList;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,9 +44,12 @@ class TodoListTest
     void addItemToTodoList()
     {
         //fix this after TodoItems is done
-        TodoItem firstItem = null;
-        TodoItem secondItem = null;
-        TodoItem thirdItem = null;
+        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem secondItem = new TodoItem("Assignment2", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem thirdItem = new TodoItem("Assignment13", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
 
         TodoList0.addItemToTodoList(firstItem);
         TodoList0.addItemToTodoList(secondItem);
@@ -60,15 +64,29 @@ class TodoListTest
     void deleteItemToTodoList()
     {
         //fix this after TodoItems is done
-        TodoItem firstItem = null;
-        TodoItem secondItem = null;
-        TodoItem thirdItem = null;
+        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem secondItem = new TodoItem("Assignment2", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem thirdItem = new TodoItem("Assignment13", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
 
         TodoList0.addItemToTodoList(firstItem);
         TodoList0.addItemToTodoList(secondItem);
-            //TodoList0.deleteItemFromTodoList(secondItem);
-        TodoList0.addItemToTodoList(thirdItem);
+        TodoList0.deleteItem(1);
 
-        assertEquals(null, TodoList0.getItemFromTodoList(secondItem));
+
+        assertEquals(1, TodoList0.getItemsInTodoList().size());
     }
+
+    @Test
+    void snoozeItemDeadlineTime()
+    {
+        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,12,00);
+        TodoList0.addItemToTodoList(firstItem);
+        TodoList0.snoozeItemDeadlineTime(1,60);
+        assertEquals(13,firstItem.getDeadlineTime().get(Calendar.HOUR_OF_DAY));
+    }
+
 }
