@@ -16,9 +16,9 @@ class CloudGetterTest
     void setup() { cloudGetter = new CloudGetter(); }
 
     @Test
-    void getTodoItemJsonStringFromHergin() throws IOException
+    void getTodoItemJsonString() throws IOException
     {
-        var result = cloudGetter.getTodoItemJsonString(1);
+        var result = cloudGetter.getTodoItemJsonString();
         assertEquals("{\n" +
                 "  \"id\": 1,\n" +
                 "  \"title\": \"Explain the project\",\n" +
