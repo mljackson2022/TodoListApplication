@@ -1,6 +1,7 @@
-package todo;
+package todoTest;
 
 import org.junit.jupiter.api.Test;
+import todo.TodoItem;
 
 import java.util.Calendar;
 
