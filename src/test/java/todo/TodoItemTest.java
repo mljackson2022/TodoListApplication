@@ -65,7 +65,7 @@ class TodoItemTest {
     void checkIfCompleted() {
         TodoItem Item = new TodoItem("Assignment1", "TeamFour",
                 "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals(false, Item.checkIfCompleted());
+        assertFalse(Item.checkIfCompleted());
     }
 
     @Test
@@ -73,7 +73,7 @@ class TodoItemTest {
         TodoItem Item = new TodoItem("Assignment1", "TeamFour",
                 "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
         Item.changeToCompleted();
-        assertEquals(true, Item.checkIfCompleted());
+        assertTrue(Item.checkIfCompleted());
     }
 
     @Test
@@ -81,7 +81,7 @@ class TodoItemTest {
         TodoItem Item = new TodoItem("Assignment1", "TeamFour",
                 "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
         Item.changeToIncomplete();
-        assertEquals(false, Item.checkIfCompleted());
+        assertFalse(Item.checkIfCompleted());
     }
 
     @Test
