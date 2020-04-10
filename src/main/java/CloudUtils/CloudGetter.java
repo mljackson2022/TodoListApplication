@@ -19,4 +19,21 @@ public class CloudGetter
         String rawResponse = getRequest.execute().parseAsString();
         return rawResponse;
     }
+
+    public String getTodoItemJsonString(int id) throws IOException
+    {
+        String rawResponse;
+        try
+        {
+            HttpRequest getRequest = requestFactory.buildGetRequest(
+                    new GenericUrl("https://todoserver222.herokuapp.com/todos/" + id));
+            rawResponse = getRequest.execute().parseAsString();
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+
+        return rawResponse;
+    }
 }
