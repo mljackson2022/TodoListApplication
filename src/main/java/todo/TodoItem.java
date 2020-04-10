@@ -1,5 +1,7 @@
 package todo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class TodoItem {
      private final int id;
      private static int nextID=1;
      private boolean status;
-     private long creationTime;
+     private Calendar creationTime;
      private Calendar completionTime;
      private Calendar deadlineTime;
 
@@ -21,9 +23,7 @@ public class TodoItem {
           this.content = content;
           this.id = getNextID();
           this.status = false;
-
-          Date date1 = new Date();
-          this.creationTime = date1.getTime();
+          this.creationTime = Calendar.getInstance();
 
           Calendar InitialTime = Calendar.getInstance();
           InitialTime.set(0,0,0,0,0);
@@ -74,34 +74,33 @@ public class TodoItem {
 
      public void changeToCompleted() {
           this.status = true;
+          setCompletionTime();
      }
 
      public void changeToIncomplete() {
           this.status = false;
      }
 
-     public long getCreationTime() {
+     public Calendar getCreationTime() {
           return creationTime;
-     }
-
-     public void setCreationTime(long creationTime) {
-          this.creationTime = creationTime;
      }
 
      public Calendar getCompletionTime() {
           return completionTime;
      }
 
-     public void setCompletionTime(int year, int month, int date, int hour, int minute) {
-          this.completionTime.set(year, month-1, date, hour, minute);
+     public void setCompletionTime() {
+          Calendar cal=Calendar.getInstance();
+          int year = cal.get(Calendar.YEAR);
+          int month = cal.get(Calendar.MONTH);
+          int day = cal.get(Calendar.DATE);
+          int hour= cal.get(Calendar.HOUR);
+          int min= cal.get(Calendar.MINUTE);
+          this.completionTime.set(year,month,day,hour,min);
      }
 
      public Calendar getDeadlineTime() {
           return deadlineTime;
-     }
-
-     public void setDeadlineTime(int year, int month, int date, int hour, int minute) {
-          this.deadlineTime.set(year, month-1, date, hour, minute);
      }
 
 }

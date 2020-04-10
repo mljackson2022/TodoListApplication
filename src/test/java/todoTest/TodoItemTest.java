@@ -82,30 +82,16 @@ class TodoItemTest {
         TodoItem Item = new TodoItem("Assignment1", "TeamFour",
                 "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
         Item.changeToIncomplete();
-        assertEquals(false, Item.checkIfCompleted());
+        assertFalse(Item.checkIfCompleted());
     }
 
     @Test
-    void getDeadlineTime() {
+    void setCompletionTime() {
         TodoItem Item = new TodoItem("Assignment1", "TeamFour",
                 "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals(2020, Item.getDeadlineTime().get(Calendar.YEAR));
-        assertEquals(3, Item.getDeadlineTime().get(Calendar.MONTH));
-        assertEquals(8, Item.getDeadlineTime().get(Calendar.DATE));
-        assertEquals(11, Item.getDeadlineTime().get(Calendar.HOUR_OF_DAY));
-        assertEquals(59, Item.getDeadlineTime().get(Calendar.MINUTE));
-    }
-
-    @Test
-    void setDeadlineTime() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.setDeadlineTime(2019,5,7,23,59);
-        assertEquals(2019, Item.getDeadlineTime().get(Calendar.YEAR));
-        assertEquals(4, Item.getDeadlineTime().get(Calendar.MONTH));
-        assertEquals(7, Item.getDeadlineTime().get(Calendar.DATE));
-        assertEquals(23, Item.getDeadlineTime().get(Calendar.HOUR_OF_DAY));
-        assertEquals(59, Item.getDeadlineTime().get(Calendar.MINUTE));
+        Calendar cal = Calendar.getInstance();
+        Item.setCompletionTime();
+        assertEquals(cal,Item.getCompletionTime());
     }
 
 
