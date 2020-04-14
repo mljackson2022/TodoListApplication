@@ -1,9 +1,6 @@
 package todo;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class TodoList
@@ -64,7 +61,7 @@ public class TodoList
         //put CloudSender.add(item) or CloudGetter.add(item) here
     }
 
-    public void deleteItem(int id)
+    public void deleteItemFromTodoList(int id)
     {
         TodoItem deletingItem = null;
         for (TodoItem todoItem : itemsInTodoList) {
@@ -75,7 +72,7 @@ public class TodoList
         itemsInTodoList.remove(deletingItem);
     }
 
-    public void completedItem(int id){
+    public void completedItemFromTodoList(int id){
         for (TodoItem todoItem : itemsInTodoList) {
             if (todoItem.getId() == id) {
                 todoItem.changeToCompleted();
@@ -83,43 +80,26 @@ public class TodoList
         }
     }
 
-    public void printAllItemInformation(){
-        for (TodoItem Item: itemsInTodoList){
-                System.out.println("Title: " + Item.getTitle());
-                System.out.println("Content: " + Item.getContent());
-                System.out.println("Owner: " + Item.getOwner());
-                if (Item.checkIfCompleted()){
-                    System.out.println("Status: Finished");
-                }else {
-                    System.out.println("Status: unfinished");
-                }
-                System.out.println("Id: " + Item.getId());
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                System.out.println("CreationTime: " + df.format(Item.getCreationTime().getTime()));
-                System.out.println("DeadlineTime: " + df.format(Item.getDeadlineTime().getTime()));
-                if (Item.checkIfCompleted()){
-                    System.out.println("CompletionTime: "+ df.format(Item.getCompletionTime().getTime()));
-                }
-                System.out.println();
+    public void printItemIdAndTitleFromTodoList(){
+            for (TodoItem Item: itemsInTodoList){
+                System.out.println(Item.getTitle());
+                System.out.println(Integer.toString(Item.getId()));
             }
-        }
-
-    public void printItemDeadlineTime(int id){
-        for (TodoItem Item: itemsInTodoList){
-            if (Item.getId() == id){
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                System.out.println(df.format(Item.getDeadlineTime().getTime()));
-            }
-        }
     }
 
-    public void snoozeItemDeadlineTime(int id, int extendTime){
-        for (TodoItem Item: itemsInTodoList){
-            if (Item.getId() == id){
-                Item.getDeadlineTime().add(Calendar.MINUTE, extendTime);
-            }
-        }
+    public static void main(String[] args) {
+        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem Item2 = new TodoItem("Assignment2", "TeamFour",
+                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoList a =new TodoList();
+        a.addItemToTodoList(Item);
+        a.addItemToTodoList(Item2);
+        a.printItemIdAndTitleFromTodoList();
     }
+
+
+
 
 
 }
