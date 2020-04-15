@@ -12,10 +12,16 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CloudEditorTest {
+public class CloudEditorTest
+{
     CloudEditor cloudEditor;
     CloudGetter cloudGetter;
     Boolean empty;
+
+    /*
+        Important note: running CloudEditorTest will result in
+        any TodoItems that were on the cloud prior to be removed
+    */
 
     @BeforeEach
     void setup() throws IOException
