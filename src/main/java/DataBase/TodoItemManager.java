@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TodoItemManager {
+public class TodoItemManager
+{
 
     Dao<TodoItem, Integer> TodoItemDao;
 
