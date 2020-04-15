@@ -22,9 +22,28 @@ public class CloudEditor
 
     public int addTodoItem(String title) throws IOException
     {
+
+        /*
+        private String title;
+     private String owner = "team4";
+     private String content;
+     private final int id;
+     private static int nextID=1;
+     private boolean status;
+     private Calendar creationTime;
+     private Calendar completionTime;
+     private Calendar deadlineTime;
+*/
+
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("title", title);
         data.put("owner", owner);
+        //data.put("content", content);
+        //data.put("status", status);
+        //data.put("deadlineTime", deadlineTime);
+
+
+
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest postRequest = requestFactory.buildPostRequest(
                 new GenericUrl("https://todoserver222.herokuapp.com/todos"), content);
@@ -35,6 +54,40 @@ public class CloudEditor
         String IDWithoutEnding = IDWithEnding.substring(0, IDWithEnding.length() - 2);
 
         return(Integer.valueOf(IDWithoutEnding));
+
+
+        /*
+        private String title;
+     private String owner = "team4";
+     private String content;
+     private final int id;
+     private static int nextID=1;
+     private boolean status;
+     private Calendar creationTime;
+     private Calendar completionTime;
+     private Calendar deadlineTime;
+
+     public TodoItem(String title,String content, int year, int month, int date, int hour, int minute){
+          this.title = title;
+          this.content = content;
+          this.id = getNextID();
+          this.status = false;
+          this.creationTime = Calendar.getInstance();
+
+          Calendar InitialTime = Calendar.getInstance();
+          InitialTime.set(0,0,0,0,0);
+          this.completionTime=InitialTime;
+
+          Calendar deadlineTime = Calendar.getInstance();
+          deadlineTime.set(year, month-1, date, hour, minute);
+          this.deadlineTime = deadlineTime;
+     }
+         */
+
+
+
+
+
     }
 
 

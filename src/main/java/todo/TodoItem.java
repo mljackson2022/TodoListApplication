@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class TodoItem {
      private String title;
-     private String owner;
+     private String owner = "team4";
      private String content;
      private final int id;
      private static int nextID=1;
@@ -17,9 +17,8 @@ public class TodoItem {
      private Calendar deadlineTime;
 
 
-     public TodoItem(String title, String owner, String content, int year, int month, int date, int hour, int minute){
+     public TodoItem(String title,String content, int year, int month, int date, int hour, int minute){
           this.title = title;
-          this.owner = owner;
           this.content = content;
           this.id = getNextID();
           this.status = false;
