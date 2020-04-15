@@ -2,18 +2,17 @@ package CloudUtils;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.util.ArrayMap;
+import todo.TodoItem;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CloudEditor
 {
     private HttpRequestFactory requestFactory;
     private String baseURL = "https://todoserver222.herokuapp.com/";
-    private String todosURL = baseURL + "todos/";
+    private String todosURL = baseURL + "todos/";       // https://todoserver222.herokuapp.com/team4/todos
+    private String team4URL = baseURL + "team4/todos";
     private String owner = "team4";
 
     public CloudEditor()
@@ -28,12 +27,13 @@ public class CloudEditor
         data.put("owner", owner);
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest postRequest = requestFactory.buildPostRequest(
-                new GenericUrl("https://todoserver222.herokuapp.com/todos"),content);
+                new GenericUrl("https://todoserver222.herokuapp.com/todos"), content);
         String rawResponse = postRequest.execute().parseAsString();
 
-        int indexOfID = rawResponse.indexOf("id");
-        String IDWithEnding = rawResponse.substring(indexOfID + 5);
+        int indexOfID = rawResponse.indexOf("\"id\"");
+        String IDWithEnding = rawResponse.substring(indexOfID + 6);
         String IDWithoutEnding = IDWithEnding.substring(0, IDWithEnding.length() - 2);
+
         return(Integer.valueOf(IDWithoutEnding));
     }
 
@@ -56,9 +56,9 @@ public class CloudEditor
 
     public boolean updateTodoItem(int id, String title) throws IOException {
         Map<String, Object> data = new LinkedHashMap<>();
-        data.put("id", id);
         data.put("title", title);
         data.put("owner", owner);
+        data.put("id", id);
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest putRequest = requestFactory.buildPutRequest(
                 new GenericUrl(todosURL + id), content);
@@ -72,5 +72,55 @@ public class CloudEditor
         }
 
         return true;
+    }
+
+    public List<String> getAllTeam4TodoItems() throws IOException
+    {
+        HttpRequest getRequest = requestFactory.buildGetRequest(
+                new GenericUrl(team4URL));
+        String rawResponse = getRequest.execute().parseAsString();
+
+        String[] split = rawResponse.split("},");
+        List<String> itemList = new ArrayList<>();
+        itemList = Arrays.asList(split);
+
+        return(itemList);
+    }
+
+    public boolean clearCloud() throws IOException
+    {
+        List<String> allItems = this.getAllTeam4TodoItems();
+        int indexOfID = -1;
+        String IDWithEnding = null;
+        int indexOfEnding = -1;
+        String IDWithoutEnding = null;
+
+        if(allItems.get(0).equals("[]"))
+        {
+            return(true);
+        }
+
+        for (int i = 0; i < allItems.size(); i++)
+        {
+            indexOfID = allItems.get(i).indexOf("\"id\"");
+            IDWithEnding = allItems.get(i).substring(indexOfID + 6);
+            indexOfEnding = IDWithEnding.indexOf(" ");
+            IDWithoutEnding = IDWithEnding.substring(0, indexOfEnding-1);
+
+            deleteTodoItem(Integer.valueOf(IDWithoutEnding));
+        }
+
+        HttpRequest getRequest = requestFactory.buildGetRequest(
+                new GenericUrl(team4URL));
+        String rawResponse = getRequest.execute().parseAsString();
+
+        if(rawResponse.equals("[]"))
+        {
+            return(true);
+        }
+        else
+        {
+            return(false);
+        }
     }
 }
