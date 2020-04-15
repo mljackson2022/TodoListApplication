@@ -85,24 +85,24 @@ public class TodoList
 
     public void printAllItemInformation(){
         for (TodoItem Item: itemsInTodoList){
-                System.out.println("Title: " + Item.getTitle());
-                System.out.println("Content: " + Item.getContent());
-                System.out.println("Owner: " + Item.getOwner());
-                if (Item.checkIfCompleted()){
-                    System.out.println("Status: Finished");
-                }else {
-                    System.out.println("Status: unfinished");
-                }
-                System.out.println("Id: " + Item.getId());
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                System.out.println("CreationTime: " + df.format(Item.getCreationTime().getTime()));
-                System.out.println("DeadlineTime: " + df.format(Item.getDeadlineTime().getTime()));
-                if (Item.checkIfCompleted()){
-                    System.out.println("CompletionTime: "+ df.format(Item.getCompletionTime().getTime()));
-                }
-                System.out.println();
+            System.out.println("Title: " + Item.getTitle());
+            System.out.println("Content: " + Item.getContent());
+            System.out.println("Owner: " + Item.getOwner());
+            if (Item.checkIfCompleted()){
+                System.out.println("Status: Finished");
+            }else {
+                System.out.println("Status: unfinished");
             }
+            System.out.println("Id: " + Item.getId());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            System.out.println("CreationTime: " + df.format(Item.getCreationTime().getTime()));
+            System.out.println("DeadlineTime: " + df.format(Item.getDeadlineTime().getTime()));
+            if (Item.checkIfCompleted()){
+                System.out.println("CompletionTime: "+ df.format(Item.getCompletionTime().getTime()));
+            }
+            System.out.println();
         }
+    }
 
     public void printItemDeadlineTime(int id){
         for (TodoItem Item: itemsInTodoList){
