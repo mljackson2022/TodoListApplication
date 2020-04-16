@@ -78,11 +78,12 @@ public class TodoList
     public void completedItem(int id){
         for (TodoItem todoItem : itemsInTodoList) {
             if (todoItem.getId() == id) {
-                todoItem.changeToCompleted();
+                todoItem.completeItem();
             }
         }
     }
 
+    //this needs to be updated for LocalDateTime
     public void printAllItemInformation(){
         for (TodoItem Item: itemsInTodoList){
             System.out.println("Title: " + Item.getTitle());
@@ -104,6 +105,7 @@ public class TodoList
         }
     }
 
+    //this needs to be updated for LocalDateTime
     public void printItemDeadlineTime(int id){
         for (TodoItem Item: itemsInTodoList){
             if (Item.getId() == id){

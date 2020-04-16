@@ -80,9 +80,9 @@ class TodoItemTest
     }
 
     @Test
-    void changeToCompleted()
+    void completeItem()
     {
-        item.changeToCompleted();
+        item.completeItem();
         assertEquals(true, item.checkIfCompleted());
     }
 
@@ -91,14 +91,6 @@ class TodoItemTest
     {
         item.changeToIncomplete();
         assertFalse(item.checkIfCompleted());
-    }
-
-    @Test
-    void setCompletionTime()
-    {
-        LocalDateTime expected = LocalDateTime.now();
-        item.setCompletionTime();
-        assertEquals(expected,item.getCompletionTime());
     }
 
     @Test
