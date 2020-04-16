@@ -44,12 +44,9 @@ class TodoListTest
     void addItemToTodoList()
     {
         //fix this after TodoItems is done
-        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        TodoItem secondItem = new TodoItem("Assignment2", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        TodoItem thirdItem = new TodoItem("Assignment13", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem firstItem = new TodoItem("Assignment1", "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem secondItem = new TodoItem("Assignment2", "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem thirdItem = new TodoItem("Assignment13", "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
 
         TodoList0.addItemToTodoList(firstItem);
         TodoList0.addItemToTodoList(secondItem);
@@ -63,30 +60,38 @@ class TodoListTest
     @Test
     void deleteItemToTodoList()
     {
-        //fix this after TodoItems is done
-        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        TodoItem secondItem = new TodoItem("Assignment2", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        TodoItem thirdItem = new TodoItem("Assignment13", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem firstItem = new TodoItem("Assignment1", "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
+        TodoItem secondItem = new TodoItem("Assignment2", "Remember to complete Assignment2 by next week", 2020, 4,8,1,59);
 
         TodoList0.addItemToTodoList(firstItem);
         TodoList0.addItemToTodoList(secondItem);
-        TodoList0.deleteItem(1);
+        TodoList0.deleteItem(secondItem.getId() - 1);
+
 
 
         assertEquals(1, TodoList0.getItemsInTodoList().size());
     }
 
     @Test
-    void snoozeItemDeadlineTime()
+    void snoozeItemDeadlineTime() //might need to make this one better
     {
-        TodoItem firstItem = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,12,00);
+        TodoItem firstItem = new TodoItem("Assignment1", "Remember to complete Assignment1 by next week", 2020, 4,8,12,00);
         TodoList0.addItemToTodoList(firstItem);
-        TodoList0.snoozeItemDeadlineTime(1,60);
-        assertEquals(13,firstItem.getDeadlineTime().get(Calendar.HOUR_OF_DAY));
+
+        TodoList0.snoozeItemDeadlineTime(firstItem.getId(), 1, 1, 1, 1, 1);
+        //2021, 5, 9, 13, 01
+
+        assertEquals(TodoList0.getItemFromTodoList(firstItem).getDeadlineTime(), firstItem.getDeadlineTime());
+    }
+
+    @Test
+    void getConsecutiveIds() //may not even matter eventually
+    {
+        TodoList TodoList1 = new TodoList();
+        TodoList TodoList2 = new TodoList();
+
+        assertEquals(TodoList1.getNameOfList(), TodoList0.getNameOfList() + 1);
+        assertEquals(TodoList2.getNameOfList(), TodoList1.getNameOfList() + 1);
     }
 
 }
