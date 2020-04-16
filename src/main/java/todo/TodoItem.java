@@ -7,8 +7,8 @@ public class TodoItem
      private String title;
      private String owner = "team4";
      private String description;
-     private final int id;
-     private static int nextID = 1;
+     private int id; //might need to be final again
+     private static int nextID=1;
      private boolean status;
 
      private LocalDateTime creationTime;
@@ -65,14 +65,14 @@ public class TodoItem
           return id;
      }
 
-     public boolean checkIfCompleted() {
-          return status;
+     //might need to change
+     public void setIdToNextAvailable()
+     {
+          this.id = this.getNextID();
      }
 
-     public void changeToCompleted()
-     {
-          this.status = true;
-          setCompletionTime();
+     public boolean checkIfCompleted() {
+          return status;
      }
 
      public void changeToIncomplete() {
@@ -83,17 +83,25 @@ public class TodoItem
           return creationTime;
      }
 
+     public void setCreationTime() { this.creationTime = LocalDateTime.now(); }
+
      public LocalDateTime getCompletionTime() {
           return completionTime;
      }
 
-     public void setCompletionTime()
+     //maybe remove
+     public void setCompletionTime(int year, int month, int date, int hour, int minute)
      {
-          this.completionTime = LocalDateTime.now();
+          this.completionTime = LocalDateTime.of(year, month, date, hour, minute);
      }
 
      public LocalDateTime getDeadlineTime() {
           return deadlineTime;
+     }
+
+     public void setDeadlineTime(int year, int month, int date, int hour, int minute)
+     {
+          this.deadlineTime = LocalDateTime.of(year, month, date, hour, minute);
      }
 
      public void snoozeDeadlineTime(long yearsAdded, long monthsAdded, long daysAdded, long hoursAdded, long minutesAdded)
@@ -105,6 +113,10 @@ public class TodoItem
           this.deadlineTime = this.deadlineTime.plusMinutes(minutesAdded);
      }
 
-
+     public void completeItem()
+     {
+          this.completionTime = LocalDateTime.now();
+          this.status = true;
+     }
 
 }

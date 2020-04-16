@@ -7,6 +7,7 @@ import com.google.api.client.http.HttpRequest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import todo.TodoItem;
 
 import java.io.IOException;
 
@@ -16,11 +17,17 @@ public class CloudEditorTest
 {
     CloudEditor cloudEditor;
     CloudGetter cloudGetter;
+
+    TodoItem item0;
+    TodoItem item1;
+    TodoItem item2;
+
     Boolean empty;
 
     /*
-        Important note: running CloudEditorTest will result in
-        any TodoItems that were on the cloud prior to be removed
+        Important note: running CloudEditorTest will result in any
+        TodoItems that were on the cloud prior to be removed from
+        https://todoserver222.herokuapp.com/team4/todos
     */
 
     @BeforeEach
@@ -28,16 +35,29 @@ public class CloudEditorTest
     {
         cloudEditor = new CloudEditor();
         cloudGetter = new CloudGetter();
+
+        item0 = new TodoItem("test task 0", "just for testing 0",
+                2020, 5, 18, 12, 30);
+        item1 = new TodoItem("test task 1", "just for testing 2",
+                2020, 4, 13, 16, 13);
+        item2 = new TodoItem("test task 2", "just for testing 2",
+                2022, 6, 15, 13, 10);
     }
+
+
 
     @Test
     void addTodoItem() throws IOException {
-        var resultingID = cloudEditor.addTodoItem("fake task");
+        var resultingID = cloudEditor.addTodoItem(item0);
         var expected = "{\n" +
-                "  \"title\": \"fake task\",\n" +
-                "  \"owner\": \"team4\",\n" +
-                "  \"id\": " + resultingID + "\n" +
-                "}";
+                "  \"title\": \"" + item0.getTitle() + "\",\n" +
+                "  \"owner\": \"" + item0.getOwner() + "\",\n" +
+                "  \"description\": \"" + item0.getDescription() + "\",\n" +
+                "  \"creation time\": \"" + item0.getCreationTime() + "\",\n" +
+                "  \"deadline time\": \""  + item0.getDeadlineTime() + "\",\n" +
+                "  \"status\": \"" + item0.checkIfCompleted() + "\",\n" +
+                "  \"id\": " + resultingID +
+                "\n}";
         var actual = cloudGetter.getTodoItemJsonString(resultingID);
 
         assertEquals(expected, actual);
@@ -46,16 +66,20 @@ public class CloudEditorTest
         assertTrue(empty);
     }
 
+
+
     @Test
     void deleteExistingTodoItem() throws IOException
     {
         empty = cloudEditor.clearCloud();
         assertTrue(empty);
 
-        var resultingID = cloudEditor.addTodoItem("hello task");
+        var resultingID = cloudEditor.addTodoItem(item0);
         var deleteResult = cloudEditor.deleteTodoItem(resultingID);
         assertTrue(deleteResult);
     }
+
+
 
     @Test
     void deleteNotExistingTodoItem() throws IOException
@@ -68,8 +92,11 @@ public class CloudEditorTest
     @Test
     void updateExistingTodoItem() throws IOException
     {
-        var resultingID = cloudEditor.addTodoItem("test task 1");
-        var updated = cloudEditor.updateTodoItem(resultingID, "test task 2");
+        var resultingID = cloudEditor.addTodoItem(item0);
+
+        //maybe reduce parameters
+        var updated = cloudEditor.updateTodoItem(item0, "TEST TASK 0", "JUST FOR TESTING 0", true,
+                2030, 6, 3, 15, 20);
 
         assertTrue(updated);
 
@@ -85,20 +112,23 @@ public class CloudEditorTest
     @Test
     void updateNotExistingTodoItem() throws IOException
     {
-        var updated = cloudEditor.updateTodoItem(214323, "Hello1");
+
+        var updated = cloudEditor.updateTodoItem(item1, "hello1", "hellohello", true,
+                2021, 4,4,4, 4);
         assertFalse(updated);
     }
 
     @Test
     void clearCloud() throws IOException
     {
-        cloudEditor.addTodoItem("clear task 1");
-        cloudEditor.addTodoItem("clear task 2");
-        cloudEditor.addTodoItem("clear task 3");
+        //cloudEditor.addTodoItem("clear task 1");
+        //cloudEditor.addTodoItem("clear task 2");
+        //cloudEditor.addTodoItem("clear task 3");
 
         var empty = cloudEditor.clearCloud();
         assertTrue(empty);
     }
+
 
     @Test
     void clearingAnEmptyCloud() throws IOException
@@ -116,14 +146,15 @@ public class CloudEditorTest
         empty = cloudEditor.clearCloud();
         assertTrue(empty);
 
-        cloudEditor.addTodoItem("thing to do 1");
-        cloudEditor.addTodoItem("thing to do 2");
-        cloudEditor.addTodoItem("thing to do 3");
+        //cloudEditor.addTodoItem("thing to do 1");
+        //cloudEditor.addTodoItem("thing to do 2");
+        //cloudEditor.addTodoItem("thing to do 3");
         var actual = cloudEditor.getAllTeam4TodoItems().size();
         assertEquals(3, actual);
 
         empty = cloudEditor.clearCloud();
         assertTrue(empty);
     }
+
 
 }

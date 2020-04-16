@@ -5,6 +5,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import todo.TodoItem;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class CloudEditor
@@ -13,35 +14,23 @@ public class CloudEditor
     private String baseURL = "https://todoserver222.herokuapp.com/";
     private String todosURL = baseURL + "todos/";       // https://todoserver222.herokuapp.com/team4/todos
     private String team4URL = baseURL + "team4/todos";
-    private String owner = "team4";
 
     public CloudEditor()
     {
         requestFactory = new NetHttpTransport().createRequestFactory();
     }
 
-    public int addTodoItem(String title) throws IOException
+    public int addTodoItem(TodoItem item) throws IOException
     {
-
-        /*
-        private String title;
-     private String owner = "team4";
-     private String content;
-     private final int id;
-     private static int nextID=1;
-     private boolean status;
-     private Calendar creationTime;
-     private Calendar completionTime;
-     private Calendar deadlineTime;
-*/
-
         Map<String, Object> data = new LinkedHashMap<>();
-        data.put("title", title);
-        data.put("owner", owner);
-        //data.put("content", content);
-        //data.put("status", status);
-        //data.put("deadlineTime", deadlineTime);
 
+        data.put("title", item.getTitle());
+        data.put("owner", item.getOwner());
+        data.put("description", item.getDescription());
+        data.put("creation time", item.getCreationTime());
+        data.put("deadline time", item.getDeadlineTime());
+        data.put("completion time", item.getCompletionTime());
+        data.put("status", item.checkIfCompleted());
 
 
         HttpContent content = new UrlEncodedContent(data);
@@ -53,41 +42,8 @@ public class CloudEditor
         String IDWithEnding = rawResponse.substring(indexOfID + 6);
         String IDWithoutEnding = IDWithEnding.substring(0, IDWithEnding.length() - 2);
 
+
         return(Integer.valueOf(IDWithoutEnding));
-
-
-        /*
-        private String title;
-     private String owner = "team4";
-     private String content;
-     private final int id;
-     private static int nextID=1;
-     private boolean status;
-     private Calendar creationTime;
-     private Calendar completionTime;
-     private Calendar deadlineTime;
-
-     public TodoItem(String title,String content, int year, int month, int date, int hour, int minute){
-          this.title = title;
-          this.content = content;
-          this.id = getNextID();
-          this.status = false;
-          this.creationTime = Calendar.getInstance();
-
-          Calendar InitialTime = Calendar.getInstance();
-          InitialTime.set(0,0,0,0,0);
-          this.completionTime=InitialTime;
-
-          Calendar deadlineTime = Calendar.getInstance();
-          deadlineTime.set(year, month-1, date, hour, minute);
-          this.deadlineTime = deadlineTime;
-     }
-         */
-
-
-
-
-
     }
 
 
@@ -107,14 +63,48 @@ public class CloudEditor
     }
 
 
-    public boolean updateTodoItem(int id, String title) throws IOException {
+    //maybe update with DateTime stuff instead of a billion parameters
+    public boolean updateTodoItem(TodoItem originalItem, String title, String description,
+                                  boolean status, int yearDeadline, int monthDeadline, int dateDeadline,
+                                  int hourDeadline, int minuteDeadline) throws IOException
+    {
         Map<String, Object> data = new LinkedHashMap<>();
-        data.put("title", title);
-        data.put("owner", owner);
-        data.put("id", id);
+
+        originalItem.setTitle(title);
+        data.put("title", originalItem.getTitle());
+
+        //change we need different owners
+        //originalItem.setOwner("");
+        data.put("owner", originalItem.getOwner());
+
+        originalItem.setDescription(description);
+        data.put("description", originalItem.getDescription());
+
+        originalItem.setCreationTime();
+        data.put("creation time", originalItem.getCreationTime());
+
+        originalItem.setDeadlineTime(yearDeadline, monthDeadline, dateDeadline, hourDeadline, minuteDeadline);
+        data.put("deadline time", originalItem.getDeadlineTime());
+
+        //Completion time only updates to now if it is completed
+        if(status == false)
+        {
+            originalItem.changeToIncomplete();
+        }
+        else
+        {
+            originalItem.completeItem();
+        }
+        data.put("completion time", originalItem.getCompletionTime());
+        data.put("status", originalItem.checkIfCompleted());
+
+
+        originalItem.setIdToNextAvailable();
+        data.put("id", originalItem.getId());
+
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest putRequest = requestFactory.buildPutRequest(
-                new GenericUrl(todosURL + id), content);
+                new GenericUrl(todosURL + originalItem.getId()), content);
         try
         {
             String rawResponse = putRequest.execute().parseAsString();
