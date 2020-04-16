@@ -29,7 +29,7 @@ public class Main {
                     System.out.println("Please enter a owner");
                     String owner = br.readLine();
                     System.out.println("Please enter a content");
-                    String content = br.readLine();
+                    String description = br.readLine();
                     System.out.println("Please enter a year");
                     int year = Integer.parseInt(br.readLine());
                     System.out.println("Please enter a month");
@@ -40,7 +40,7 @@ public class Main {
                     int hour = Integer.parseInt(br.readLine());
                     System.out.println("Please enter a minute");
                     int minute = Integer.parseInt(br.readLine());
-                    TodoItem addItem = new TodoItem(title, owner, content, year, month, date, hour, minute);
+                    TodoItem addItem = new TodoItem(title, description, year, month, date, hour, minute);
                     list.addItemToTodoList(addItem);
                     System.out.println();
                 }else if (input.equals("delete")){
@@ -66,7 +66,7 @@ public class Main {
                     list.printItemDeadlineTime(snoozedId);
                     System.out.println("Please enter how many minutes you want to extend: ");
                     int snoozeTime = Integer.parseInt(br.readLine());
-                    list.snoozeItemDeadlineTime(snoozedId, snoozeTime);
+                    //list.snoozeItemDeadlineTime(snoozedId, snoozeTime);                   FIXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     System.out.println("The modification was successful. The current deadline for this to-do is: ");
                     list.printItemDeadlineTime(snoozedId);
                     System.out.println();

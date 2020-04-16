@@ -1,36 +1,30 @@
 package todo;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class TodoItem {
+public class TodoItem
+{
      private String title;
      private String owner = "team4";
-     private String content;
+     private String description;
      private final int id;
-     private static int nextID=1;
+     private static int nextID = 1;
      private boolean status;
-     private Calendar creationTime;
-     private Calendar completionTime;
-     private Calendar deadlineTime;
+
+     private LocalDateTime creationTime;
+     private LocalDateTime completionTime;
+     private LocalDateTime deadlineTime;
 
 
-     public TodoItem(String title,String content, int year, int month, int date, int hour, int minute){
+     public TodoItem(String title, String description, int year, int month, int date, int hour, int minute)
+     {
           this.title = title;
-          this.content = content;
+          this.description = description;
           this.id = getNextID();
           this.status = false;
-          this.creationTime = Calendar.getInstance();
-
-          Calendar InitialTime = Calendar.getInstance();
-          InitialTime.set(0,0,0,0,0);
-          this.completionTime=InitialTime;
-
-          Calendar deadlineTime = Calendar.getInstance();
-          deadlineTime.set(year, month-1, date, hour, minute);
-          this.deadlineTime = deadlineTime;
+          this.creationTime = LocalDateTime.now();
+          this.completionTime = null;
+          this.deadlineTime = LocalDateTime.of(year, month, date, hour, minute);
      }
 
      public String getTitle() {
@@ -45,23 +39,27 @@ public class TodoItem {
           return owner;
      }
 
-     public void setOwner(String owner) {
+     /*
+     public void setOwner(String owner)
+     {
           this.owner = owner;
      }
+     */
 
-     public String getContent() {
-          return content;
+     public String getDescription() {
+          return description;
      }
 
-     public void setContent(String content) {
-          this.content = content;
+     public void setDescription(String description) {
+          this.description = description;
      }
 
      public int getId() {
           return id;
      }
 
-     public static int getNextID(){
+     public static int getNextID()
+     {
           int id=nextID;
           nextID++;
           return id;
@@ -71,7 +69,8 @@ public class TodoItem {
           return status;
      }
 
-     public void changeToCompleted() {
+     public void changeToCompleted()
+     {
           this.status = true;
           setCompletionTime();
      }
@@ -80,26 +79,32 @@ public class TodoItem {
           this.status = false;
      }
 
-     public Calendar getCreationTime() {
+     public LocalDateTime getCreationTime() {
           return creationTime;
      }
 
-     public Calendar getCompletionTime() {
+     public LocalDateTime getCompletionTime() {
           return completionTime;
      }
 
-     public void setCompletionTime() {
-          Calendar cal=Calendar.getInstance();
-          int year = cal.get(Calendar.YEAR);
-          int month = cal.get(Calendar.MONTH);
-          int day = cal.get(Calendar.DATE);
-          int hour= cal.get(Calendar.HOUR);
-          int min= cal.get(Calendar.MINUTE);
-          this.completionTime.set(year,month,day,hour,min);
+     public void setCompletionTime()
+     {
+          this.completionTime = LocalDateTime.now();
      }
 
-     public Calendar getDeadlineTime() {
+     public LocalDateTime getDeadlineTime() {
           return deadlineTime;
      }
+
+     public void snoozeDeadlineTime(long yearsAdded, long monthsAdded, long daysAdded, long hoursAdded, long minutesAdded)
+     {
+          this.deadlineTime = this.deadlineTime.plusYears(yearsAdded);
+          this.deadlineTime = this.deadlineTime.plusMonths(monthsAdded);
+          this.deadlineTime = this.deadlineTime.plusDays(daysAdded);
+          this.deadlineTime = this.deadlineTime.plusHours(hoursAdded);
+          this.deadlineTime = this.deadlineTime.plusMinutes(minutesAdded);
+     }
+
+
 
 }

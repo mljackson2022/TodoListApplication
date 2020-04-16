@@ -1,97 +1,127 @@
 package todoTest;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import todo.TodoItem;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TodoItemTest {
+class TodoItemTest
+{
+    TodoItem item;
 
-    @Test
-    void getTitle() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals("Assignment1", Item.getTitle());
+    @BeforeEach
+    void setup()
+    {
+        item = new TodoItem("Assignment1", "Remember to complete Assignment1 by next week",
+                2020, 4, 8, 11, 59);
     }
 
     @Test
-    void setTitle() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.setTitle("Assignment2");
-        assertEquals("Assignment2", Item.getTitle());
+    void getTitle()
+    {
+        assertEquals("Assignment1", item.getTitle());
     }
 
     @Test
-    void getOwner() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals("TeamFour", Item.getOwner());
+    void setTitle()
+    {
+        item.setTitle("Assignment2");
+        assertEquals("Assignment2", item.getTitle());
     }
 
     @Test
-    void setOwner() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.setOwner("TeamZero");
-        assertEquals("TeamZero", Item.getOwner());
+    void getOwner()
+    {
+        assertEquals("team4", item.getOwner());
+    }
+
+    /*      maybe put back in if we need to change owners
+    @Test
+    void setOwner()
+    {
+        item.setOwner("TeamZero");
+        assertEquals("TeamZero", item.getOwner());
+    }
+    */
+
+    @Test
+    void getDescription()
+    {
+        assertEquals("Remember to complete Assignment1 by next week", item.getDescription());
     }
 
     @Test
-    void getContent() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals("Remember to complete Assignment1 by next week", Item.getContent());
+    void setDescription()
+    {
+        item.setDescription("Remember to complete Assignment2 by next week");
+        assertEquals("Remember to complete Assignment2 by next week", item.getDescription());
     }
 
     @Test
-    void setContent() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.setContent("Remember to complete Assignment2 by next week");
-        assertEquals("Remember to complete Assignment2 by next week", Item.getContent());
+    void getConsecutiveIds()
+    {
+        TodoItem item2 = new TodoItem("Assignment2", "Remember to complete Assignment2 by next week",
+                2021, 5, 5, 1, 10);
+        TodoItem item3 = new TodoItem("Assignment3", "Remember to complete Assignment3 by next week",
+                2023, 1, 16, 18, 30);
+
+        assertEquals(item2.getId(), item.getId() + 1);
+        assertEquals(item3.getId(), item2.getId() + 1);
     }
 
     @Test
-    void getId() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals(4, Item.getId());
-
+    void checkIfCompleted()
+    {
+        assertEquals(false, item.checkIfCompleted());
     }
 
     @Test
-    void checkIfCompleted() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        assertEquals(false, Item.checkIfCompleted());
+    void changeToCompleted()
+    {
+        item.changeToCompleted();
+        assertEquals(true, item.checkIfCompleted());
     }
 
     @Test
-    void changeToCompleted() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.changeToCompleted();
-        assertEquals(true, Item.checkIfCompleted());
+    void changeToIncomplete()
+    {
+        item.changeToIncomplete();
+        assertFalse(item.checkIfCompleted());
     }
 
     @Test
-    void changeToIncomplete() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Item.changeToIncomplete();
-        assertFalse(Item.checkIfCompleted());
+    void setCompletionTime()
+    {
+        LocalDateTime expected = LocalDateTime.now();
+        item.setCompletionTime();
+        assertEquals(expected,item.getCompletionTime());
     }
 
     @Test
-    void setCompletionTime() {
-        TodoItem Item = new TodoItem("Assignment1", "TeamFour",
-                "Remember to complete Assignment1 by next week", 2020, 4,8,11,59);
-        Calendar cal = Calendar.getInstance();
-        Item.setCompletionTime();
-        assertEquals(cal,Item.getCompletionTime());
+    void getDeadlineTime()
+    {
+        LocalDateTime expected = LocalDateTime.of(2020, 4, 8, 11, 59);
+        assertEquals(expected, item.getDeadlineTime());
+    }
+
+    @Test
+    void snoozeDeadlineTime()
+    {
+        item.snoozeDeadlineTime(1, 1, 1, 1, 1);
+        LocalDateTime expected = LocalDateTime.of(2021, 5, 9, 13, 00);
+        assertEquals(expected, item.getDeadlineTime());
+    }
+
+    @Test
+    void snoozeDeadlineTimeEmpty()
+    {
+        item.snoozeDeadlineTime(0, 0, 0, 0, 0);
+        LocalDateTime expected = LocalDateTime.of(2020, 4, 8, 11, 59);
+        assertEquals(expected, item.getDeadlineTime());
     }
 
 
