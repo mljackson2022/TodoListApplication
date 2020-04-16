@@ -16,7 +16,7 @@ public class TodoItem
      private LocalDateTime deadlineTime;
 
 
-     public TodoItem(String title, String description, int year, int month, int date, int hour, int minute)
+     public TodoItem(String title, String description, int deadlineYear, int deadlineMonth, int deadlineDate, int deadlineHour, int deadlineMinute)
      {
           this.title = title;
           this.description = description;
@@ -24,7 +24,7 @@ public class TodoItem
           this.status = false;
           this.creationTime = LocalDateTime.now();
           this.completionTime = null;
-          this.deadlineTime = LocalDateTime.of(year, month, date, hour, minute);
+          this.deadlineTime = LocalDateTime.of(deadlineYear, deadlineMonth, deadlineDate, deadlineHour, deadlineMinute);
      }
 
      public String getTitle() {
