@@ -32,7 +32,8 @@ public class CloudParser
         JsonArray rootObjects = rootElement.getAsJsonArray();
         TodoList todoList = new TodoList();
 
-        TodoItem todoItem = new TodoItem(null,null,-1,-1,-1,-1,-1);
+
+        TodoItem todoItem = new TodoItem(null,null,null);
 
         for (JsonElement rootObject : rootObjects) {
             var title = rootObject.getAsJsonObject().getAsJsonPrimitive("title").getAsString();
@@ -45,7 +46,6 @@ public class CloudParser
 
             todoItem.setTitle(title);
             todoItem.setDescription(description);
-            todoItem.setDeadlineTime(year,month,date,hour,minute);
             todoList.addItemToTodoList(todoItem);
         }
         return todoList;
