@@ -121,9 +121,9 @@ public class CloudEditorTest
     @Test
     void clearCloud() throws IOException
     {
-        //cloudEditor.addTodoItem("clear task 1");
-        //cloudEditor.addTodoItem("clear task 2");
-        //cloudEditor.addTodoItem("clear task 3");
+        cloudEditor.addTodoItem(item0);
+        cloudEditor.addTodoItem(item1);
+        cloudEditor.addTodoItem(item2);
 
         var empty = cloudEditor.clearCloud();
         assertTrue(empty);
@@ -146,15 +146,13 @@ public class CloudEditorTest
         empty = cloudEditor.clearCloud();
         assertTrue(empty);
 
-        //cloudEditor.addTodoItem("thing to do 1");
-        //cloudEditor.addTodoItem("thing to do 2");
-        //cloudEditor.addTodoItem("thing to do 3");
+        cloudEditor.addTodoItem(item0);
+        cloudEditor.addTodoItem(item1);
+        cloudEditor.addTodoItem(item2);
         var actual = cloudEditor.getAllTeam4TodoItems().size();
         assertEquals(3, actual);
 
         empty = cloudEditor.clearCloud();
         assertTrue(empty);
     }
-
-
 }
