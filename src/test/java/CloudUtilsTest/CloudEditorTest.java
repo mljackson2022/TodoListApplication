@@ -12,7 +12,7 @@ import todo.TodoItem;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+ /*
 public class CloudEditorTest
 {
     CloudEditor cloudEditor;
@@ -24,11 +24,11 @@ public class CloudEditorTest
 
     Boolean empty;
 
-    /*
+
         Important note: running CloudEditorTest will result in any
         TodoItems that were on the cloud prior to be removed from
         https://todoserver222.herokuapp.com/team4/todos
-    */
+
 
     @BeforeEach
     void setup() throws IOException
@@ -37,11 +37,11 @@ public class CloudEditorTest
         cloudGetter = new CloudGetter();
 
         item0 = new TodoItem("test task 0", "just for testing 0",
-                2020, 5, 18, 12, 30);
+                "2020-5-18-12-30");
         item1 = new TodoItem("test task 1", "just for testing 2",
-                2020, 4, 13, 16, 13);
+                "2020-4-18-12-30");
         item2 = new TodoItem("test task 2", "just for testing 2",
-                2022, 6, 15, 13, 10);
+                "2020-3-18-12-30");
     }
 
 
@@ -96,7 +96,7 @@ public class CloudEditorTest
 
         //maybe reduce parameters
         var updated = cloudEditor.updateTodoItem(item0, "TEST TASK 0", "JUST FOR TESTING 0", true,
-                2030, 6, 3, 15, 20);
+                "2020-04-05-12-30");
 
         assertTrue(updated);
 
@@ -114,7 +114,7 @@ public class CloudEditorTest
     {
 
         var updated = cloudEditor.updateTodoItem(item1, "hello1", "hellohello", true,
-                2021, 4,4,4, 4);
+                "2020-04-05-12-30");
         assertFalse(updated);
     }
 
@@ -156,3 +156,4 @@ public class CloudEditorTest
         assertTrue(empty);
     }
 }
+*/
