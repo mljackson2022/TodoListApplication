@@ -1,8 +1,7 @@
-import CloudUtils.CloudEditor;
-import CloudUtils.CloudGetter;
-import CloudUtils.CloudParser;
-import DataBase.TodoItemManager;
-import PieChart.ChartUI;
+import cloudutils.CloudEditor;
+import cloudutils.CloudParser;
+import database.TodoItemManager;
+import piechart.ChartUI;
 import todo.TodoItem;
 import todo.TodoList;
 
@@ -12,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class UI extends JFrame implements ActionListener {
 
@@ -210,7 +208,7 @@ public class UI extends JFrame implements ActionListener {
         });
 
         //PieChart button
-        pieChart = new JButton("PieChart");
+        pieChart = new JButton("piechart");
         var pieChartConstraints = new GridBagConstraints(4, 11, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
         pieChart.addActionListener(new ActionListener() {
             @Override

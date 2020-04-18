@@ -1,10 +1,7 @@
 package CloudUtilsTest;
 
-import CloudUtils.CloudEditor;
-import CloudUtils.CloudGetter;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import org.junit.jupiter.api.AfterAll;
+import cloudutils.CloudEditor;
+import cloudutils.CloudGetter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import todo.TodoItem;

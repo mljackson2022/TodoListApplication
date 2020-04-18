@@ -1,4 +1,4 @@
-package PieChart;
+package piechart;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;

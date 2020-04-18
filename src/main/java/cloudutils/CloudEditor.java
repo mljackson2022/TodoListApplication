@@ -1,15 +1,10 @@
-package CloudUtils;
+package cloudutils;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import todo.TodoItem;
-import todo.TodoList;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class CloudEditor

@@ -1,4 +1,4 @@
-package PieChart;
+package piechart;
 
 import org.javatuples.Pair;
 import todo.TodoItem;

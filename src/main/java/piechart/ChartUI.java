@@ -1,6 +1,6 @@
-package PieChart;
+package piechart;
 
-import CloudUtils.CloudParser;
+import cloudutils.CloudParser;
 import org.javatuples.Pair;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
