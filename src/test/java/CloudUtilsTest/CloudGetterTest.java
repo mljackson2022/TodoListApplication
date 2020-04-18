@@ -15,6 +15,7 @@ class CloudGetterTest
     @BeforeEach
     void setup() { cloudGetter = new CloudGetter(); }
 
+
     @Test
     void getTodoItemJsonString() throws IOException
     {
@@ -53,4 +54,5 @@ class CloudGetterTest
 
 }
 
- */
+     */
+

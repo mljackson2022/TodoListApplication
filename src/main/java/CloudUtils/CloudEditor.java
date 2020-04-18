@@ -16,7 +16,7 @@ public class CloudEditor
 {
     private HttpRequestFactory requestFactory;
     private String baseURL = "https://todoserver222.herokuapp.com/";
-    private String todosURL = baseURL + "todos/";       // https://todoserver222.herokuapp.com/team4/todos
+    private String todosURL = baseURL + "todos/";
     private String team4URL = baseURL + "team4/todos/";
 
     public CloudEditor()
@@ -64,8 +64,6 @@ public class CloudEditor
         return true;
     }
 
-
-    //maybe update with DateTime stuff instead of a billion parameters
     public boolean updateTodoItem(TodoItem originalItem, String title, String description,
                                   boolean status, String duedate) throws IOException
     {
@@ -131,8 +129,10 @@ public class CloudEditor
     /*
     public boolean clearCloud() throws IOException
     {
-        String allItems = this.getAllTeam4TodoItems();
-        List<TodoItem> =
+        String Items = this.getAllTeam4TodoItems();
+        CloudParser parser = new CloudParser();
+
+        List<TodoItem> = parser.parseJsonTodoItem(allItems);
         int indexOfID = -1;
         String IDWithEnding = null;
         int indexOfEnding = -1;
@@ -166,24 +166,11 @@ public class CloudEditor
             return(false);
         }
     }
-    */
+
+     */
 
     public static void main(String[] args) throws IOException {
 
-        //Completed
-        TodoItem a = new TodoItem("CS222", "Assignment1","2020-04-01T12:00");
-        a.completeItem();
-
-        //Pending
-        TodoItem b = new TodoItem("CS222","Assignment2","2020-05-01T12:00");
-
-        //Overdue
-        TodoItem c = new TodoItem("CS222", "Assignment3", "2020-04-01T12:00");
-
-        CloudEditor cloud = new CloudEditor();
-        cloud.addTodoItem(a);
-        cloud.addTodoItem(b);
-        cloud.addTodoItem(c);
 
     }
 
