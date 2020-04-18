@@ -28,8 +28,8 @@ public class UI extends JFrame implements ActionListener {
     JButton sync;
     JButton pieChart;
     JLabel titleNote;
-    JLabel DescriptionNote;
-    JLabel DueDateNote;
+    JLabel descriptionNote;
+    JLabel dueDateNote;
     JLabel operateNote;
 
     TodoList list = new TodoList();
@@ -64,9 +64,9 @@ public class UI extends JFrame implements ActionListener {
         title.setSize(150,150);
 
         //Operation tips label
-        DescriptionNote = new JLabel("Please enter a description:");
-        var DescriptionConstraints = new GridBagConstraints(2, 2, 3, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
-        panel.add(DescriptionNote, DescriptionConstraints);
+        descriptionNote = new JLabel("Please enter a description:");
+        var descriptionNoteConstraints = new GridBagConstraints(2, 2, 3, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
+        panel.add(descriptionNote, descriptionNoteConstraints);
         titleNote.setSize(150,150);
 
         //Area to enter description
@@ -76,9 +76,9 @@ public class UI extends JFrame implements ActionListener {
         description.setSize(150,150);
 
         //Operation tips label
-        DueDateNote = new JLabel("Please enter a due date (Example:2020-04-15T12:00):");
-        var DueDateConstraints = new GridBagConstraints(2, 4, 3, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
-        panel.add(DueDateNote, DueDateConstraints);
+        dueDateNote = new JLabel("Please enter a due date (Example:2020-04-15T12:00):");
+        var dueDateConstraints = new GridBagConstraints(2, 4, 3, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0);
+        panel.add(dueDateNote, dueDateConstraints);
         titleNote.setSize(150,150);
 
         ////Area to enter due date
