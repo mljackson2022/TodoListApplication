@@ -114,7 +114,7 @@ public class TodoItem
 
      public void snoozeDeadlineTime(String snoozeDate)
      {
-          this.deadlineTime= LocalDateTime.parse(snoozeDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+          this.deadlineTime = LocalDateTime.parse(snoozeDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
      }
 
      public void completeItem()

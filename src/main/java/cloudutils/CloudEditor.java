@@ -80,7 +80,7 @@ public class CloudEditor
         /*
         originalItem.setDeadlineTime(duedate);
         data.put("deadline time", originalItem.getDeadlineTime());
-         */
+        */
 
         //Completion time only updates to now if it is completed
         if(status == false)
