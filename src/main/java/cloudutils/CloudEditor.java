@@ -10,9 +10,8 @@ import java.util.*;
 public class CloudEditor
 {
     private HttpRequestFactory requestFactory;
-    private String baseURL = "https://todoserver222.herokuapp.com/";
-    private String todosURL = baseURL + "todos/";
-    private String team4URL = baseURL + "team4/todos/";
+    private String baseURL = "https://todoserver-team4.herokuapp.com/todos";
+
 
     public CloudEditor()
     {
@@ -47,7 +46,7 @@ public class CloudEditor
     public boolean deleteTodoItem(int id) throws IOException
     {
         HttpRequest deleteRequest = requestFactory.buildDeleteRequest(
-                new GenericUrl(todosURL + id));
+                new GenericUrl(baseURL + id));
         try
         {
             String rawResponse = deleteRequest.execute().parseAsString();
@@ -100,7 +99,7 @@ public class CloudEditor
 
         HttpContent content = new UrlEncodedContent(data);
         HttpRequest putRequest = requestFactory.buildPutRequest(
-                new GenericUrl(todosURL + originalItem.getId()), content);
+                new GenericUrl(baseURL + originalItem.getId()), content);
         try
         {
             String rawResponse = putRequest.execute().parseAsString();
@@ -116,7 +115,7 @@ public class CloudEditor
     public String getAllTeam4TodoItems() throws IOException
     {
         HttpRequest getRequest = requestFactory.buildGetRequest(
-                new GenericUrl(team4URL));
+                new GenericUrl(baseURL));
         String rawResponse = getRequest.execute().parseAsString();
         return rawResponse;
     }
