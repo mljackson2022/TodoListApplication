@@ -9,18 +9,6 @@ import todo.TodoList;
 
 public class CloudParser
 {
-    public static TodoItem parseJsonTodo(String jsonString) throws CloudParserException.ParameterIsNotJsonStringException
-    {
-        if(!(jsonString.charAt(0) == '{'))
-        {
-            throw new CloudParserException.ParameterIsNotJsonStringException();
-        }
-
-        Gson gson = new Gson();
-        TodoItem todoObject = gson.fromJson(jsonString, TodoItem.class);
-        return todoObject;
-    }
-
     public TodoList parseJsonTodoItem(String jsonString)
     {
         JsonParser jsonParser = new JsonParser();

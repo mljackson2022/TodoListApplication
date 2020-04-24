@@ -16,7 +16,6 @@ public class CloudEditor
     private HttpRequestFactory requestFactory;
     private String baseURL = "https://todoserver-team4.herokuapp.com/todos/";
 
-
     public CloudEditor()
     {
         requestFactory = new NetHttpTransport().createRequestFactory();
